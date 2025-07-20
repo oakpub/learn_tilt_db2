@@ -5,6 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install dependencies
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
 RUN pip install Flask psycopg2-binary
 
 # Copy the content of the local src directory to the working directory

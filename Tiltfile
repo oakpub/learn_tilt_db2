@@ -42,4 +42,4 @@ k8s_yaml(helm(
 k8s_resource('main-app-service-a', port_forwards='8080:80')
 k8s_resource('main-app-service-b', port_forwards='8081:80')
 k8s_resource('main-app-service-a-db', port_forwards='5433:5432')
-k8s_resource('main-app-service-b-db', port_forwards='5432:5432')
+k8s_resource('main-app-service-b-db', port_forwards='5434:5432')

@@ -28,7 +28,7 @@ spec:
               value: {{ .Values.serviceB.database.port | quote }}
             - name: DB_USER
               value: {{ .Values.serviceB.database.user | quote }}
-            - name: DB_PASSWORD
+            - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ .Release.Name }}-service-b-db-secret
