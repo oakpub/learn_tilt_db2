@@ -1,0 +1,6 @@
+# Ignore Helm secrets file
+helm/app/secrets.yaml
+
+# Ignore Tilt user-specific config
+.tilt-config.json
+tilt_modules/

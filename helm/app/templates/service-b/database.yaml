@@ -1,0 +1,5 @@
+{{- if .Values.serviceB.database.enabled -}}
+{{- include "mychart.database.secret" (dict "release" .Release "serviceName" "service-b" "dbConfig" .Values.serviceB.database) | nindent 0 }}
+---
+{{- include "mychart.postgresql.database" (dict "release" .Release "serviceName" "service-b" "dbConfig" .Values.serviceB.database) | nindent 0 }}
+{{- end -}}

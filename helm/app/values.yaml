@@ -1,0 +1,68 @@
+# Global settings
+
+# -- Service A configuration
+serviceA:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: my-repo/service-a
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 80
+  # Database configuration for Service A.
+  database:
+    enabled: true
+    name: "service_a_db"
+    image:
+      repository: postgres
+      tag: "13"
+    persistence:
+      enabled: true
+      size: 1Gi
+      storageClass: ""
+    # Name of the service and statefulset will be derived from the service name (e.g., main-app-service-b-db)
+    image:
+      repository: postgres
+      tag: "13"
+    persistence:
+      enabled: true
+      size: 1Gi
+      storageClass: ""
+    # Connection settings
+    host: "main-app-service-a-db"
+    port: 5432
+    user: "user-a"
+    password: "" # This will be overridden by secrets.yaml
+    name: "service_a_db"
+
+# -- Service B configuration
+serviceB:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: my-repo/service-b
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 80
+  # Database configuration for Service B.
+  # This will create a dedicated PostgreSQL instance for this service.
+  database:
+    enabled: true
+    # Name of the service and statefulset will be derived from the service name (e.g., main-app-service-b-db)
+    image:
+      repository: postgres
+      tag: "13"
+    persistence:
+      enabled: true
+      size: 1Gi
+      storageClass: ""
+    # Connection settings
+    host: "main-app-service-b-db"
+    port: 5432
+    user: "user-b"
+    password: ""
+    name: "service_b_db"

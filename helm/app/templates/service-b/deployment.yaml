@@ -1,0 +1,38 @@
+{{- if .Values.serviceB.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-service-b
+  labels:
+    app: service-b
+spec:
+  replicas: {{ .Values.serviceB.replicaCount }}
+  selector:
+    matchLabels:
+      app: service-b
+  template:
+    metadata:
+      labels:
+        app: service-b
+    spec:
+      containers:
+        - name: service-b
+          image: "{{ .Values.serviceB.image.repository }}:{{ .Values.serviceB.image.tag }}"
+          imagePullPolicy: {{ .Values.serviceB.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: {{ .Values.serviceB.database.host | quote }}
+            - name: DB_PORT
+              value: {{ .Values.serviceB.database.port | quote }}
+            - name: DB_USER
+              value: {{ .Values.serviceB.database.user | quote }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-service-b-db-secret
+                  key: POSTGRES_PASSWORD
+            - name: DB_NAME
+              value: {{ .Values.serviceB.database.name | quote }}
+{{- end }}
