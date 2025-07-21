@@ -14,7 +14,7 @@
 - **Docker**
 - **Локальный кластер Kubernetes** (Minikube, Kind, Docker Desktop)
 - **[Tilt](https://docs.tilt.dev/install.html)**
-- **[Helm](https://helm.sh/docs/intro/install/)** (опционально, для отладки)
+- **[Helm](https://helm.sh/docs/intro/install/)**
 
 ## Структура проекта
 
